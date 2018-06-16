@@ -9,11 +9,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.DecimalFormat;
+import java.util.Random;
+
 @RestController
 public class HelloController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    private static Random rand = new Random();
     @Autowired
     Environment environment;
 
@@ -24,38 +27,33 @@ public class HelloController {
 
 
         String port =environment.getProperty("local.server.port");
-        System.out.println("Current port:" + port);
-        logger.info(String.valueOf(port == "8081"));
+//        System.out.println("Current port:" + port);
+//        logger.info(String.valueOf(port == "8081"));
 
         if (port.equals("8081")){
             parkingSpace.setId("1");
-            parkingSpace.setName("Velvet House");
-            parkingSpace.setLat(53.476303);
-            parkingSpace.setLongti(-2.235134);
+            parkingSpace.setLat(getRandomLat());
+            parkingSpace.setLongti(getRandomLongi());
         }
         else if (port.equals("8082")){
             parkingSpace.setId("2");
-            parkingSpace.setName("The Assembly Apartments");
-            parkingSpace.setLat(53.474018);
-            parkingSpace.setLongti(-2.243838);
+            parkingSpace.setLat(getRandomLat());
+            parkingSpace.setLongti(getRandomLongi());
         }
         else if (port.equals("8083")){
             parkingSpace.setId("3");
-            parkingSpace.setName("Cotswold Outdoor Manchester Deansgate");
-            parkingSpace.setLat(53.481575);
-            parkingSpace.setLongti(-2.247807);
+            parkingSpace.setLat(getRandomLat());
+            parkingSpace.setLongti(getRandomLongi());
         }
         else if (port.equals("8084")){
             parkingSpace.setId("4");
-            parkingSpace.setName("University of Salford");
-            parkingSpace.setLat(53.486979);
-            parkingSpace.setLongti(-2.271241);
+            parkingSpace.setLat(getRandomLat());
+            parkingSpace.setLongti(getRandomLongi());
         }
         else{
             parkingSpace.setId("5");
-            parkingSpace.setName("National Football Museum");
-            parkingSpace.setLat(53.487840);
-            parkingSpace.setLongti(-2.242093);
+            parkingSpace.setLat(getRandomLat());
+            parkingSpace.setLongti(getRandomLongi());
         }
 
         String json = "";
@@ -69,6 +67,19 @@ public class HelloController {
 
 
         return json;
+    }
+
+    private static double getRandomLat(){
+        double lat = -2.25 + rand.nextDouble() * 0.04;
+        DecimalFormat df=new DecimalFormat("#.000000");
+        double formattedLat = Double.valueOf(df.format(lat));
+        return formattedLat;
+    }
+    private static double getRandomLongi(){
+        double longi = 53.46 + rand.nextDouble() * 0.02;
+        DecimalFormat df=new DecimalFormat("#.000000");
+        double formattedLongi = Double.valueOf(df.format(longi));
+        return formattedLongi;
     }
     
 }
