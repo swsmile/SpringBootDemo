@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
-        packages("hello.rest");
+        packages("hello.con");
     }
 
 }
