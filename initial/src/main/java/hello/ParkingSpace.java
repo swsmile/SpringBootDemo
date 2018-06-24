@@ -7,6 +7,7 @@ public class ParkingSpace {
     private String name;
     private double lat;
     private double longi;
+    private String data;
 
     public Boolean getAvailable() {
         return isAvailable;
@@ -56,6 +57,11 @@ public class ParkingSpace {
         this.longi = longt;
     }
 
+    public String getData() {
+        return data;
+    }
 
-    
+    public void setData(String data) {
+        this.data = data;
+    }
 }
